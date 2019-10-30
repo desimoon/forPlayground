@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import MobileContextProvider from 'Context/MobileContext';
 import ScrollContextProvider from 'Context/ScrollContext';
 import useWindowSize from 'customHooks/useWindowSize';
 import useForm from 'customHooks/useForm';
-import useScroll from 'customHooks/useScroll';
 import Carosuel from 'components/Carosuel/Carousel';
 import {
   GridContainer,
@@ -17,7 +16,6 @@ import {
   Button,
   Footer,
   CookieBanner,
-  FormValidationErrorFeedback,
   FormField,
 } from 'components/';
 import { fields } from 'utils/initialStateForm';
@@ -46,28 +44,24 @@ function App() {
     clearForm,
   } = useForm(fields, errorMessageToHide, handleShowSubmittedForm);
 
-  const isTresholdExceeded = useScroll() ? '#4A00E4' : 'transparent';
-
-  useEffect(() => {
-    console.log('App rendered');
-  });
-
   const handleHideErrorValidation = field => event => {
     setErrorMessageToHide(field);
     setTimeout(() => setErrorMessageToHide(''), 500);
   };
 
   return (
-    <div className="App">
-      <ScrollContextProvider>
-        <MobileContextProvider>
+    <ScrollContextProvider>
+      <MobileContextProvider>
+        <div className="App">
           <section className="wrapper-header">
             <GridContainer
               container_fluid={screen.isMobile ? <Texture /> : null}
               container={<Header />}
-              background={screen.isMobile ? '#4A00E4' : isTresholdExceeded}
+              header
+              // background={screen.isMobile ? '#4A00E4' : isTresholdExceeded}
             />
           </section>
+
           <section className="slider">
             <GridContainer
               container_fluid={<Carosuel />}
@@ -253,9 +247,9 @@ function App() {
           </section>
 
           <CookieBanner />
-        </MobileContextProvider>
-      </ScrollContextProvider>
-    </div>
+        </div>
+      </MobileContextProvider>
+    </ScrollContextProvider>
   );
 }
 

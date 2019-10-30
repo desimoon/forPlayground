@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 
-const useScroll = () => {
+const useScroll = limit => {
   const isClient = typeof window === 'object';
 
   function getPageYOffset() {
@@ -19,7 +19,7 @@ const useScroll = () => {
     }
 
     function handleScroll() {
-      setIsTresholdExceeded(getPageYOffset() > 750);
+      setIsTresholdExceeded(getPageYOffset() > limit);
     }
 
     window.addEventListener('scroll', handleScroll);
