@@ -1,0 +1,17 @@
+.Timer {
+  position: absolute;
+  right: 30px;
+  transform: rotate(270deg);
+  .external {
+    stroke: rgba(255, 255, 255, 0.3);
+  }
+  .inner {
+    stroke: rgba(255, 255, 255, 0.8);
+  }
+  .seconds {
+    font-size: 0.6rem;
+    fill: #fff;
+    transform-origin: 50%;
+    transform: rotate(90deg);
+  }
+}

@@ -1,0 +1,16 @@
+import React from 'react';
+{{#myIf module}}
+import styles from './{{pascalCase name}}.module.{{cssType}}';
+{{else}}
+import './{{pascalCase name}}.{{cssType}}';
+{{/myIf}}
+
+const {{pascalCase name}} = props => {
+  return (
+    <div>
+      {{pascalCase name}}
+    </div>
+  );
+};
+
+export default {{pascalCase name}};

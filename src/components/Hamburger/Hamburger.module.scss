@@ -1,0 +1,42 @@
+.hamburger {
+  width: 35px;
+  height: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
+
+  & > span {
+    height: 4px;
+    border-radius: 2px;
+    background-color: #fff;
+    transition: all 500ms ease-in-out;
+  }
+
+  &.open > span {
+    position: absolute;
+    background-color: #f02c20;
+
+    &:first-child {
+      width: 25px;
+      transform: translateX(12px) translateY(6px) rotate(44deg);
+    }
+
+    &:nth-child(2) {
+      width: 25px;
+      transform: translateX(-3px) translateY(6px) rotate(-45deg);
+    }
+
+    &:last-child {
+      width: 35px;
+      bottom: 0;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}

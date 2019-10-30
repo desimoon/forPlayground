@@ -1,0 +1,12 @@
+.button {
+  //margin-top: auto;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: transparent !important;
+    border: 1px solid #d02f2f !important;
+    color: #d02f2f !important;
+    cursor: not-allowed;
+  }
+}

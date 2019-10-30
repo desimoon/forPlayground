@@ -1,0 +1,40 @@
+@mixin card-layout(
+  $direction-card: row,
+  $image-flex-value: 1,
+  $image-height: auto,
+  $image-x-pos: 25%,
+  $align-items-text-div: center,
+  $text-min-height: 0,
+  $space-between-cards: 30px 0
+) {
+  display: flex;
+  flex: 1;
+  flex-direction: $direction-card;
+  background-color: #fff;
+
+  & > div:first-child {
+    flex: $image-flex-value;
+    height: $image-height;
+    background-position: center 50%;
+  }
+
+  & > div:last-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: $align-items-text-div;
+
+    p {
+      min-height: $text-min-height;
+      padding: 0px 20px;
+      text-align: center;
+    }
+  }
+
+  &:nth-child(2) {
+    margin: $space-between-cards;
+    & > div:first-child {
+      background-position: $image-x-pos 50%;
+    }
+  }
+}

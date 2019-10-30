@@ -1,0 +1,18 @@
+.CookieBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: 0 -1px 3px 0 rgba(0, 0, 0, 0.1);
+  padding: 0 15px;
+  box-sizing: border-box;
+
+  button {
+    margin-left: 40px;
+  }
+}

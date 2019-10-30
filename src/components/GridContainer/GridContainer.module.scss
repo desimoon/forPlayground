@@ -1,0 +1,76 @@
+.GridContainer {
+  display: grid;
+  grid-template-columns: minmax(15px, 1fr) minmax(auto, 100%) minmax(15px, 1fr);
+  grid-template-rows: auto;
+
+  .broadContainer {
+    grid-column: 1 / 4;
+    grid-row: 1;
+
+    // &.override {
+    //   grid-column: 2 / 4;
+    // }
+  }
+
+  .narrowContainer {
+    grid-column: 2 / 3;
+    z-index: 1;
+    grid-row: 1;
+
+    &.forceToColumnOnMobile {
+      grid-row: 2;
+    }
+  }
+
+  .forceToFluid {
+    grid-column: 1 / 4;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .GridContainer {
+    grid-template-columns: minmax(15px, 1fr) minmax(auto, 540px) minmax(
+        15px,
+        1fr
+      );
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .GridContainer {
+    grid-template-columns: minmax(15px, 1fr) minmax(auto, 720px) minmax(
+        15px,
+        1fr
+      );
+    .narrowContainer {
+      grid-row: 1;
+      z-index: 3;
+      &.forceToColumnOnMobile {
+        grid-row: 1;
+      }
+    }
+    .broadContainer {
+      &.override {
+        grid-column: 2 / 4;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .GridContainer {
+    grid-template-columns: minmax(15px, 1fr) minmax(auto, 960px) minmax(
+        15px,
+        1fr
+      );
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .GridContainer {
+    grid-template-columns: minmax(15px, 1fr) minmax(auto, 1140px) minmax(
+        15px,
+        1fr
+      );
+  }
+}

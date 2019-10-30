@@ -1,0 +1,31 @@
+@import '../../global.scss';
+
+.card {
+  @include card-layout();
+}
+
+@media screen and (min-width: 576px) {
+  .card {
+    @include card-layout();
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    @include card-layout($image-x-pos: 0%);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .card {
+    @include card-layout(
+      $direction-card: column,
+      $image-flex-value: 0 0 auto,
+      $image-height: 100px,
+      $image-x-pos: 0%,
+      $text-min-height: 130px,
+      $space-between-cards: 0px 30px,
+      $align-items-text-div: stretch
+    );
+  }
+}

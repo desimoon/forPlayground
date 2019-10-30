@@ -1,0 +1,19 @@
+.FormField {
+  width: 100%;
+  margin-bottom: 1rem;
+  display: flex;
+
+  &.firstName,
+  &.lastName {
+    flex: 0 0 48%;
+  }
+
+  &.email,
+  &.message {
+    flex: 0 0 100%;
+  }
+  // form field (input, textarea)
+  .formElement.hide {
+    display: none;
+  }
+}

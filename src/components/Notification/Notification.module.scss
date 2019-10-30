@@ -1,0 +1,20 @@
+.Notification {
+  background-color: #4a00e4;
+  color: #fff;
+  width: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, 500%);
+  padding: 30px 30px 40px;
+  border-radius: 10px;
+  transition: transform 300ms ease-in-out;
+
+  &.show {
+    transform: translate(-50%, -50%);
+  }
+
+  & > p {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,34 @@
+.Footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 90px 0;
+
+  .menu {
+    width: 100%;
+    margin: 40px 0;
+  }
+
+  .social {
+    & > a {
+      color: #4d4d4d;
+
+      &:visited,
+      &:link {
+        color: #4d4d4d;
+      }
+    }
+    & > a:not(:last-child) {
+      margin-right: 20px;
+    }
+    svg {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .Footer .menu {
+    width: 50%;
+  }
+}
