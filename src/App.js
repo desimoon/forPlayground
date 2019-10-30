@@ -57,8 +57,8 @@ function App() {
             <GridContainer
               container_fluid={screen.isMobile ? <Texture /> : null}
               container={<Header />}
+              background={screen.isMobile ? '#4A00E4' : null}
               header
-              // background={screen.isMobile ? '#4A00E4' : isTresholdExceeded}
             />
           </section>
 

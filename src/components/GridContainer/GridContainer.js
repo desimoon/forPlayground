@@ -13,19 +13,21 @@ const GridContainer = ({
   header = false,
 }) => {
   const scroll = useContext(ScrollContext);
-  console.log(scroll);
   const isTresholdExceeded = useScroll(scroll.tresholdNav)
     ? '#4A00E4'
     : 'transparent';
-  console.log('limite oltrepassato', isTresholdExceeded);
-  return (
-    <div
-      className={styles.GridContainer}
-      style={{
-        backgroundColor: header ? isTresholdExceeded : background,
+
+  const bgStyle = header
+    ? {
+        backgroundColor: background ? background : isTresholdExceeded,
         transition: 'background-color 300ms ease-in-out',
-      }}
-    >
+      }
+    : {
+        backgroundColor: background,
+      };
+
+  return (
+    <div className={styles.GridContainer} style={bgStyle}>
       <div
         className={`
           ${styles.narrowContainer} 

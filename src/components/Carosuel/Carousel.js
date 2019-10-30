@@ -12,7 +12,7 @@ const Carosuel = () => {
   const sliderRef = useRef(null);
 
   useEffect(() => {
-    const treshold = sliderRef.current.getBoundingClientRect().bottom;
+    const treshold = sliderRef.current.offsetHeight;
     console.log('slider bottom pos', treshold);
     scroll.setTresholdNav(treshold);
   }, []);
