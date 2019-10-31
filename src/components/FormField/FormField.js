@@ -13,7 +13,7 @@ const FormField = props => {
   } = props;
 
   const { FormField, formElement, hide } = styles;
-  const showErrorMessage = errorMessage && !isFieldFocused;
+  const showErrorMessage = errorMessage && !isFieldFocused ? true : false;
   let field;
 
   switch (tag) {
@@ -41,11 +41,12 @@ const FormField = props => {
     <div className={`${FormField} ${styles[attr.name]}`}>
       <FormValidationErrorFeedback
         tag={tag}
-        showErrorMessage={showErrorMessage ? true : false}
+        // showErrorMessage={showErrorMessage ? true : false}
         fieldName={attr.name}
         errorMessage={errorMessage}
         hideErrorMessage={hideErrorMessage}
       />
+
       {field}
     </div>
   );

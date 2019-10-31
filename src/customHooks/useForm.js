@@ -5,13 +5,24 @@ const validEmailRegex = RegExp(
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
 );
 
-const useForm = (initialState, resetErrorMessageField, callback) => {
+const useForm = (initialState, fieldErrorMessageToReset, callback) => {
   const [values, setValues] = useState(initialState);
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [errors, setErrors] = useState(false);
 
   useEffect(() => {
-    handleResetErrorMessage();
-  }, [resetErrorMessageField]);
+    if (fieldErrorMessageToReset) handleResetErrorMessage();
+    const atLeastOneError = Object.entries(values).find(field => {
+      console.log(field);
+      return field[1].isValid === false;
+    });
+    console.log('One error?', atLeastOneError);
+    if (atLeastOneError && atLeastOneError[1].isValid === false) {
+      setErrors(true);
+    } else {
+      setErrors(false);
+    }
+  }, [fieldErrorMessageToReset, values]);
 
   const validator = (field, value) => {
     switch (field) {
@@ -22,11 +33,7 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
           ...prevState,
           [field]: {
             ...prevState[field],
-            field: value,
-            errorMessage:
-              value.length < 5 && values[field]['focused']
-                ? `${field} must be 5 characters long!`
-                : '',
+            value: value,
           },
         }));
         break;
@@ -37,8 +44,7 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
           ...prevState,
           [field]: {
             ...prevState[field],
-            field: value,
-            errorMessage: isValid ? '' : 'Email is not valid!',
+            value: value,
           },
         }));
         break;
@@ -59,14 +65,9 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
   const handleResetErrorMessage = () => {
     setValues(prevState => ({
       ...prevState,
-      numOfError:
-        prevState.numOfError > 0 &&
-        prevState[resetErrorMessageField].errorMessage
-          ? prevState.numOfError - 1
-          : prevState.numOfError,
-      [resetErrorMessageField]: {
-        ...prevState[resetErrorMessageField],
-        errorMessage: '',
+      [fieldErrorMessageToReset]: {
+        ...prevState[fieldErrorMessageToReset],
+        isValid: 'pending',
       },
     }));
   };
@@ -78,7 +79,6 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
       [name]: {
         ...prevState[name],
         focused: true,
-        // errorMessage: '',
       },
     }));
   };
@@ -87,37 +87,24 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
     const { name } = event.target;
     setValues(prevState => ({
       ...prevState,
-      numOfError:
-        (values[name]['field'] === '' && values[name]['focused']) ||
-        (values[name]['field'].length < 5 && values[name]['focused'])
-          ? prevState.numOfError + 1
-          : prevState.numOfError,
       [name]: {
         ...prevState[name],
-        errorMessage:
-          (values[name]['field'] === '' && values[name]['focused']) ||
-          (values[name]['field'].length < 5 && values[name]['focused']) ||
+        isValid:
+          (values[name]['value'] === '' && values[name]['focused']) ||
+          (values[name]['value'].length < 5 && values[name]['focused']) ||
           (name === 'email' && !isEmailValid)
-            ? name === 'email'
-              ? 'email is not valid'
-              : `${name} must be 5 characters long!`
-            : '',
+            ? false
+            : true,
         focused: false,
       },
     }));
+    console.log(values);
   };
 
   const handleChangeInput = event => {
     event.persist();
     const { name, value } = event.target;
     validator(name, value);
-    // setValues(prevState => ({
-    //   ...prevState,
-    //   [name]: {
-    //     ...prevState[name],
-    //     field: value,
-    //   },
-    // }));
   };
 
   return {
@@ -126,6 +113,7 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
     handleChangeInput,
     handleFocusInput,
     handleBlurInput,
+    errors,
     clearForm: clear,
   };
 };

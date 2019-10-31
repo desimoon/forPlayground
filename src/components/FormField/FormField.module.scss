@@ -2,6 +2,7 @@
   width: 100%;
   margin-bottom: 1rem;
   display: flex;
+  height: 42px;
 
   &.firstName,
   &.lastName {
@@ -11,6 +12,21 @@
   &.email,
   &.message {
     flex: 0 0 100%;
+  }
+
+  &.message {
+    height: 110px;
+  }
+
+  input,
+  textarea {
+    height: 100%;
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
   }
   // form field (input, textarea)
   .formElement.hide {

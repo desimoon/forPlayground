@@ -11,7 +11,9 @@ const Notification = ({
   return (
     <div className={`${styles.Notification} ${isVisible && styles.show}`}>
       {children}
-      <Timer closeNotification={closeNotification} clearForm={clearForm} />
+      {isVisible && (
+        <Timer closeNotification={closeNotification} clearForm={clearForm} />
+      )}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import styles from './FormValidationErrorFeedback.module.scss';
 
 const FormValidationErrorFeedback = ({
   tag,
-  showErrorMessage,
+  // showErrorMessage,
   fieldName,
   errorMessage,
   hideErrorMessage,
@@ -14,7 +14,7 @@ const FormValidationErrorFeedback = ({
       onClick={hideErrorMessage(fieldName)}
       className={`
           ${FormValidationErrorFeedback} 
-          ${showErrorMessage ? show : ''}
+          ${errorMessage ? show : ''}
           ${styles[tag]}
         `}
     >

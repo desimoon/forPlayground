@@ -74,14 +74,12 @@ const Texture = () => {
   const numOfSquareForRow = squareForRow();
   const numOfSquareForColumn = Math.floor(screen.height / 50);
   const totalNumOfSquares = numOfSquareForRow * numOfSquareForColumn;
-  console.log('n° square', breakpoint.value, totalNumOfSquares);
   const squaresRef = Array(totalNumOfSquares).fill(useRef(null));
   const squares = Array(totalNumOfSquares)
     .fill(null)
     .map((v, i) => ({
       id: 'id' + i,
     }));
-  console.log('squares', squares);
 
   const getPosition = ind => {
     if (squaresRef && squaresRef[ind].current) {
@@ -102,13 +100,14 @@ const Texture = () => {
 
   return (
     <StyledTexture showSquare={breakpoint.isMobile && isMenuOpen}>
-      {squares.map((square, ind) => {
-        return (
-          <StyledDiv key={square.id}>
-            <Square ref={squaresRef[ind]} position={getPosition(ind)} />
-          </StyledDiv>
-        );
-      })}
+      {isMenuOpen &&
+        squares.map((square, ind) => {
+          return (
+            <StyledDiv key={square.id}>
+              <Square ref={squaresRef[ind]} position={getPosition(ind)} />
+            </StyledDiv>
+          );
+        })}
     </StyledTexture>
   );
 };
