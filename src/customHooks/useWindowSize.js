@@ -1,33 +1,43 @@
 import { useState, useEffect, useMemo } from 'react';
 
 const useWindowSize = () => {
-  const isClient = typeof window === 'object';
-
   function getSize() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    let breakpoint = 'xs';
+    switch (true) {
+      case w >= 576 && w < 768:
+        breakpoint = 'sm';
+        break;
+      case w >= 768 && w < 992:
+        breakpoint = 'md';
+        break;
+      case w >= 992 && w < 1200:
+        breakpoint = 'lg';
+        break;
+      case w >= 1200:
+        breakpoint = 'xl';
+        break;
+      default:
+    }
     return {
-      width: isClient ? window.innerWidth : undefined,
-      height: isClient ? window.innerHeight : undefined,
+      width: breakpoint,
+      height: h,
     };
   }
 
-  const [windowWidth, setWindowWidth] = useState(getSize().width);
+  const [gridBreakpoint, setGridBreakpoint] = useState(getSize().width);
   const [windowHeight, setWindowHeight] = useState(getSize().height);
-  const [isMobile, setIsMobile] = useState(getSize().width < 768);
 
   const size = useMemo(() => {
-    return { windowWidth, windowHeight, isMobile };
-  }, [windowWidth, windowHeight, isMobile]);
+    return { gridBreakpoint, windowHeight };
+  }, [gridBreakpoint, windowHeight]);
 
   useEffect(() => {
-    if (!isClient) {
-      return false;
-    }
-
     function handleResize() {
       const { width, height } = getSize();
-      setWindowWidth(width);
+      setGridBreakpoint(width);
       setWindowHeight(height);
-      setIsMobile(width < 768);
     }
 
     window.addEventListener('resize', handleResize);
@@ -36,9 +46,8 @@ const useWindowSize = () => {
   }); // [] Empty array ensures that effect is only run on mount and unmount
 
   return {
-    width: size.windowWidth,
+    width: size.gridBreakpoint,
     height: size.windowHeight,
-    isMobile: size.isMobile,
   };
 };
 

@@ -14,7 +14,6 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
   }, [resetErrorMessageField]);
 
   const validator = (field, value) => {
-    console.log('field', field, value);
     switch (field) {
       case 'firstName':
       case 'lastName':
@@ -34,7 +33,6 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
       case 'email':
         const isValid = validEmailRegex.test(value);
         setIsEmailValid(isValid);
-        console.log('is email valid? ', isValid);
         setValues(prevState => ({
           ...prevState,
           [field]: {
@@ -87,12 +85,6 @@ const useForm = (initialState, resetErrorMessageField, callback) => {
 
   const handleBlurInput = event => {
     const { name } = event.target;
-    console.log(
-      'val ',
-      values[name]['field'],
-      ' focus ',
-      values[name]['focused'],
-    );
     setValues(prevState => ({
       ...prevState,
       numOfError:

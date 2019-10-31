@@ -36,7 +36,7 @@ const FormField = props => {
       break;
     default:
   }
-  // console.log('# ', errorMessage, ' * ', isFieldFocused);
+
   return (
     <div className={`${FormField} ${styles[attr.name]}`}>
       <FormValidationErrorFeedback

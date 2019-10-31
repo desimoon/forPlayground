@@ -13,13 +13,11 @@ const Form = ({
 }) => {
   const scroll = useContext(ScrollContext);
   const titleRef = useRef(null);
-  console.log('values ->', values);
 
   useEffect(() => {
     if (titleRef.current.id === scroll.clickedLink) {
       let titleRefTopPosition = titleRef.current.getBoundingClientRect().top;
       titleRefTopPosition += window.pageYOffset;
-      console.log(titleRef.current.id, titleRefTopPosition);
       window.scrollTo({
         behavior: 'smooth',
         top: titleRefTopPosition - 62,

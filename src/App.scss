@@ -78,6 +78,17 @@
       height: 110px;
     }
   }
+
+  ._global_cookie_banner_ ._global_narrow_container_ {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 70px;
+
+    & > p {
+      font-size: 0.8rem;
+    }
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -86,6 +97,9 @@
   }
   .section-title {
     font-size: 4rem;
+  }
+  ._global_cookie_banner_ ._global_narrow_container_ > p {
+    font-size: 1rem !important;
   }
 }
 

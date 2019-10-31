@@ -19,7 +19,7 @@ const useScroll = limit => {
     }
 
     function handleScroll() {
-      setIsTresholdExceeded(getPageYOffset() > limit);
+      setIsTresholdExceeded(getPageYOffset() > limit - 62);
     }
 
     window.addEventListener('scroll', handleScroll);

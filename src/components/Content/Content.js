@@ -1,6 +1,7 @@
 import React, { useContext, useRef, useEffect } from 'react';
 import { ScrollContext } from 'Context/ScrollContext';
-import { Button, Anchor } from 'components/';
+import { MobileContext } from 'Context/MobileContext';
+import { Anchor } from 'components/';
 import useWindowSize from 'customHooks/useWindowSize';
 import styles from './Content.module.scss';
 
@@ -13,13 +14,13 @@ const Content = ({
   goTo = null,
 }) => {
   const scroll = useContext(ScrollContext);
+  const { breakpoint } = useContext(MobileContext);
   const titleRef = useRef(null);
 
   useEffect(() => {
     if (titleRef.current.id.slice(0, -1) === scroll.clickedLink) {
       let titleRefTopPosition = titleRef.current.getBoundingClientRect().top;
       titleRefTopPosition += window.pageYOffset;
-      console.log(titleRef.current.id, titleRefTopPosition);
       window.scrollTo({
         behavior: 'smooth',
         top: titleRefTopPosition - 62,
@@ -58,12 +59,12 @@ const Content = ({
       </div>
     ) : null;
   };
-  const screen = useWindowSize();
+
   return (
     <div className={styles.Content}>
       <div
         style={
-          screen.width < 768 && !columns.left.fillWithContent
+          breakpoint.isMobile && !columns.left.fillWithContent
             ? { flex: 0 }
             : { flex: columns.left.width }
         }
@@ -73,7 +74,7 @@ const Content = ({
       </div>
       <div
         style={
-          screen.width < 768 && !columns.right.fillWithContent
+          breakpoint.isMobile && !columns.right.fillWithContent
             ? { flex: 0 }
             : { flex: columns.right.width }
         }

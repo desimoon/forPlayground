@@ -53,21 +53,35 @@ const Square = styled.div`
     props.position && props.position.top ? '#fff' : '#fff'};
   opacity: 0.4;
   position: relative;
-  animation: ${props => moveSquare()} 900ms linear alternate infinite;
+  animation: ${props => moveSquare()} 900ms linear alternate infinite forwards;
 `;
 
 const Texture = () => {
-  const mobile = useContext(MobileContext);
+  const { breakpoint, isMenuOpen } = useContext(MobileContext);
+
+  const squareForRow = () => {
+    switch (breakpoint.value) {
+      case 'xs':
+        return 10;
+      case 'sm':
+        return 15;
+      default:
+        return 0;
+    }
+  };
+
   const screen = useWindowSize();
-  const numOfSquareForRow = Math.floor(screen.width / 50);
+  const numOfSquareForRow = squareForRow();
   const numOfSquareForColumn = Math.floor(screen.height / 50);
   const totalNumOfSquares = numOfSquareForRow * numOfSquareForColumn;
+  console.log('n° square', breakpoint.value, totalNumOfSquares);
   const squaresRef = Array(totalNumOfSquares).fill(useRef(null));
   const squares = Array(totalNumOfSquares)
     .fill(null)
     .map((v, i) => ({
       id: 'id' + i,
     }));
+  console.log('squares', squares);
 
   const getPosition = ind => {
     if (squaresRef && squaresRef[ind].current) {
@@ -87,29 +101,11 @@ const Texture = () => {
   };
 
   return (
-    <StyledTexture
-      showSquare={screen.width < 768 && mobile.isOpenMenu ? true : false}
-    >
+    <StyledTexture showSquare={breakpoint.isMobile && isMenuOpen}>
       {squares.map((square, ind) => {
         return (
           <StyledDiv key={square.id}>
-            <Square
-              ref={squaresRef[ind]}
-              position={getPosition(ind)}
-              // left={
-              //   squaresRef &&
-              //   squaresRef[ind].current &&
-              //   window
-              //     .getComputedStyle(squaresRef[ind].current, null)
-              //     .getPropertyValue('left')
-              // }
-              // ref={el => {
-              //   myRef = el
-              //   const square = window.getComputedStyle(myRef, null)
-              //   positions.top = square.offsetTop
-              //   positions.left = square.offsetLeft
-              // }}
-            />
+            <Square ref={squaresRef[ind]} position={getPosition(ind)} />
           </StyledDiv>
         );
       })}

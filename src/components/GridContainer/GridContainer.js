@@ -30,7 +30,7 @@ const GridContainer = ({
     <div className={styles.GridContainer} style={bgStyle}>
       <div
         className={`
-          ${styles.narrowContainer} 
+          ${styles.narrowContainer} _global_narrow_container_ 
           ${forceToFluid ? styles.forceToFluid : ''}
           ${forceToColumnOnMobile ? styles.forceToColumnOnMobile : ''}
         `}
